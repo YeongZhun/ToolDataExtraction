@@ -1,5 +1,5 @@
 # ToolDataExtraction
-This code is meant to extract raw data from Semiconductor/SiliconPhotonics tools and format it in a tidy way, while adding new conveniences to help with data reviewing. (Data/values provided in iamge example is edited to protect company's interest.)
+This code is meant to extract raw data from Semiconductor/SiliconPhotonics tools and format it in a tidy way, while adding new conveniences to help with data reviewing. (Data/values provided in image examples are edited to protect company's interests)
 
 Some basic understanding: 
 A wafer is a thin slice of silicon from high purity and defect-free single crystalline silicon. It is circular in shape and  resembles a huge CD, and through photolithography, it is patterned into tiny rectangular/square shapes called a Die, where each die will go through several fabrication steps to reach completion. These dies can then be packaged together with other components to form a chip, which is essential for computers.
