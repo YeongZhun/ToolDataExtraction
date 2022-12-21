@@ -10,6 +10,6 @@ Current available Tools:
 1) Optical Loss (Attaching optical fiber chip to measure insertion/return loss)
 2) Thickness (Measuring thickness in units of nm or Å with Optiprobe based on material's refractive index and film stack)
 
-Possible work-in-progress:
+Possible work-in-progress (That's why there is a huge blank space in the GUI):
 1) CD-SEM: Critical Dimension Scanning Electron Microscope
 2) Electrical Test (Probe method)
