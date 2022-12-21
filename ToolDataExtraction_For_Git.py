@@ -157,33 +157,6 @@ class OT_Frame(ttk.Frame):
                 copy_table.insert(0,"Slot ID",Slotlist[slotcount])
                 copy_table.columns.values[1] = "Die No."
 
-                # copy_table.loc[:, "Avg_Chn_Loss"] = ""
-                # copy_table.loc[:, "Avg_Slab_Loss"] = ""
-                # copy_table.loc[:, "Avg_SiN_Loss"] = ""
-        
-                # try:
-                #     find_channel_loss_index = copy_table.columns.get_loc("E6(1.68)")
-                #     copy_table.rename(columns={ copy_table.columns[find_channel_loss_index+1]: "Chn Loss" }, inplace = True)
-                #     copy_table["Chn Loss"] = copy_table["Chn Loss"].abs()
-                #     avg_chn_loss = copy_table.iloc[:,find_channel_loss_index+1].mean(skipna=True)
-                #     copy_table.loc[0,"Avg_Chn_Loss"] = avg_chn_loss
-                        
-                #     find_slab_loss_index = copy_table.columns.get_loc("E9(1.68)")
-                #     copy_table.rename(columns={ copy_table.columns[find_slab_loss_index+1]: "Slab Loss" }, inplace = True)
-                #     copy_table["Slab Loss"] = copy_table["Slab Loss"].abs()
-                #     avg_slab_loss = copy_table.iloc[:,find_slab_loss_index+1].mean(skipna=True)
-                #     copy_table.loc[0,"Avg_Slab_Loss"] = avg_slab_loss
-                    
-                #     # find_SiN_loss_index = copy_table.columns.get_loc("N3(304)")
-                #     # copy_table.rename(columns={ copy_table.columns[find_SiN_loss_index+1]: "SiN Loss" }, inplace = True)
-                #     # copy_table["SiN Loss"] = copy_table["SiN Loss"].abs()
-                #     # avg_SiN_loss = copy_table.iloc[:,find_SiN_loss_index+1].mean(skipna=True)
-                #     # copy_table.loc[0,"Avg_SiN_Loss"] = avg_SiN_loss
-                        
-                # except:
-                #     print("There is an error.")
-                #     pass
-
                 df_per_slot.append(copy_table)
                 combined_dataframe = pd.concat(df_per_slot, ignore_index=True)
                 slotcount+=1
@@ -191,16 +164,6 @@ class OT_Frame(ttk.Frame):
             with pd.ExcelWriter(OT_Save_Location+".xlsx", engine='xlsxwriter') as writer:
                 combined_dataframe.style.set_properties(**{'text-align': 'center'}).to_excel(writer, sheet_name="Optical Loss", startrow=2, startcol=2, index=False)
 
-
-            # OT_excel_file = pd.ExcelWriter(OT_Save_Location+".xlsx")
-            # combined_dataframe = combined_dataframe.style.set_properties(**{'text-align': 'center'})
-            # combined_dataframe.to_excel(OT_excel_file, sheet_name="Optical Loss", startrow=2, startcol=2, index=False)
-
-            # column_list = combined_dataframe.columns.values.tolist()
-            # #+2 because final excel sheets starts after 2 column (and 2 row)
-            # Chn_col_list = column_list.index("Avg_Chn_Loss") + 2
-            # Slab_col_list = column_list.index("Avg_Slab_Loss") + 2
-            # SiN_col_list = column_list.index("Avg_SiN_Loss") + 2
                 (max_row, max_col) = combined_dataframe.shape
                 workbook = writer.book
                 worksheet = writer.sheets['Optical Loss']
@@ -215,28 +178,6 @@ class OT_Frame(ttk.Frame):
                 worksheet.add_table(2, 2, max_row + 2, max_col + 1, {'columns': column_settings, 'autofilter': False})
                 worksheet.set_column(0, max_col+1, 15)
                 worksheet.set_zoom(90)
-
-
-    #        for sheetname, df in combined_dataframe.items():  # loop through `dict` of dataframes
-    #            # combined_dataframe.to_excel(OT_excel_file, sheet_name="Optical Loss", startrow=2, startcol=2, index=False)  # send df to writer
-    #            worksheet = OT_excel_file.sheets["Optical Loss"]  # pull worksheet object
-    #            for idx, col in enumerate(combined_dataframe):  # loop through all columns
-    #                series = combined_dataframe[col]
-    #                max_len = max((
-    #                    series.astype(str).map(len).max(),  # len of largest item
-    #                    len(str(series.name))  # len of column name/header
-    #                    )) + 8  # adding a little extra space
-    #                worksheet.set_column(idx, idx, max_len)  # set column width
-
-
-
-            # worksheet.set_column(Chn_col_list,Chn_col_list, None, bold)
-            # worksheet.set_column(Slab_col_list,Slab_col_list, None, bold)
-            # worksheet.set_column(SiN_col_list,SiN_col_list, None, bold)
-
-
-            # Center_alignment_layer3.api.HorizontalAlignment = xw.constants.HAlign.xlHAlignCenter
-            # Center_alignment_layer3.api.VerticalAlignment = xw.constants.HAlign.xlHAlignCenter
             
                 writer.close()
                 self.button3.config(state=DISABLED)
@@ -467,9 +408,7 @@ class Thk_Frame(ttk.Frame):
                         Temp_thk_1to5_j_layer1 = i[j][:6]
                         Temp_thk_1to5_layer1.append(Temp_thk_1to5_j_layer1)
                 ##print(f"This is Temp_thk_1to5_layer1:\n {Temp_thk_1to5_layer1}")
-                ##print(len(Temp_thk_1to5_layer1))
-                ##print(len(Temp_thk_1to5_layer1))
-                ##print(len(Layer_empty_list))
+      
                 for i in range(0, len(Temp_thk_1to5_layer1), int(len(Temp_thk_1to5_layer1)/len(Layer_empty_list))):
                     Temp_layer_empty_list_1to5_layer1 = Temp_thk_1to5_layer1[i:i+int(len(Temp_thk_1to5_layer1)/len(Layer_empty_list))]
                     Layer_empty_list_1to5_layer1.append(Temp_layer_empty_list_1to5_layer1)
@@ -617,13 +556,8 @@ class Thk_Frame(ttk.Frame):
                     # print(f"Pivot_bold_list_layer1: {Pivot_bold_list_layer1}")
 
                     Pivot_5pts_dict_layer1 = {}
-                    # for l in range(0, len(Pivot_layer1_thk_list_dcopy), Max_site):
-                    #     Temp_pivot_5pts_list_layer1 = Pivot_layer1_thk_list_dcopy[l:l+5]
-                    #     Pivot_5pts_list_layer1.append(Temp_pivot_5pts_list_layer1)
-                    # print(f"This is Pivot_5pts_list: {Pivot_5pts_list_layer1}")
 
                     for l in range(0, len(Pivot_layer1_thk_list_dcopy), Max_site):
-                        # Temp_pivot_5pts_list_layer1 = Pivot_layer1_thk_list_dcopy[l:l+5]
                         Pivot_5pts_list_layer1.append(Pivot_layer1_thk_list_dcopy[l:l+5])
                     # print(f"This is Pivot_5pts_list: {Pivot_5pts_list_layer1}")                    
 
@@ -842,10 +776,6 @@ class Thk_Frame(ttk.Frame):
                         
                         Pivot_5pts_dict_layer2 = dict(zip(Pivot_5pts_list_layer2[0],Pivot_bold_list_layer2))
 
-
-
-
-
                         Red_div_layer2 = (255-0)/len(Pivot_layer2_thk_list)
                         Red_div_rounded_layer2 = np.floor(Red_div_layer2)
                         ##print(Red_div_rounded_layer2)
@@ -923,9 +853,7 @@ class Thk_Frame(ttk.Frame):
                                 Temp_thk_1to5_j_layer3 = i[j][:6]
                                 Temp_thk_1to5_layer3.append(Temp_thk_1to5_j_layer3)
                         ##print(f"This is Temp_thk_1to5_layer3:\n {Temp_thk_1to5_layer3}")
-                        ##print(len(Temp_thk_1to5_layer3))
-                        ##print(len(Temp_thk_1to5_layer3))
-                        ##print(len(Layer_empty_list))
+  
                         for i in range(0, len(Temp_thk_1to5_layer3), int(len(Temp_thk_1to5_layer3)/len(Layer_empty_list))):
                             Temp_layer_empty_list_1to5_layer3 = Temp_thk_1to5_layer3[i:i+int(len(Temp_thk_1to5_layer3)/len(Layer_empty_list))]
                             Layer_empty_list_1to5_layer3.append(Temp_layer_empty_list_1to5_layer3)
