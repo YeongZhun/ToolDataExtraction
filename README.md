@@ -7,6 +7,7 @@ Things learnt in this project:
 - Python Excel modules (xlwings, xlsxwriter, etc)
 - File/Folder management with os, glob
 - Employing Threading so process can run simultaneously
+- Extra: could not find a color scale conditional formatting function, so I made my own (e.g. Line 695), went surprisingly well
 
 Some basic understanding: 
 Throughout each wafer fabrication steps, e.g. Photolithography, Etching, Deposition of thin film, Cleaning, there are important parameters that need to be measured to confirm that the process is successful and is within specifications. These parameters can include Thickness, Critical Dimensions (CD), Etch Rate, etc. However, the raw data measured from the tool can be very hard to read and unformatted. This is why I have wrote this to automate and format the raw data into something readable, and with some extra data visualisation, allows us to review data efficiently.
